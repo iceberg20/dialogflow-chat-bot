@@ -7,7 +7,10 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module ChatBot
-  class Application < Rails::Application
+	class Application < Rails::Application
+	  	config.action_dispatch.default_headers = {
+		'X-Frame-Options' => 'ALLOWALL'
+	}
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
