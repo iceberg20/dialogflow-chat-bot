@@ -1,0 +1,108 @@
+
+
+*, html, body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    background: rgb(0, 152, 208);
+}
+.chat-card{
+    width: 100%;
+    background: #f4f4f4;
+}
+.chat-card header{
+    width: 100%;
+    background: rgb(0, 152, 208);
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 2em;
+    height: 80px;
+    padding: 20px;
+    position: fixed;
+}
+.chat-card .chat-body{
+    width: 100%;
+    padding: 25px;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 90px;
+    padding-bottom: 90px;
+    
+}
+
+.chat-card .chat-body .message{
+    width: fit-content;
+    max-width: 25em;
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+}
+
+.chat-card .chat-body .message-bot{
+    background: rgb(255, 255, 255);
+    border-bottom-left-radius: 0px;
+    margin-right: auto;
+
+}
+.chat-card .chat-body .message-user{
+    background: rgb(126, 221, 255);
+    border-bottom-right-radius: 0px;
+    margin-left: auto;
+}
+
+.chat-card .sender{
+    display: grid;
+    grid-template-rows: 50px;
+    grid-template-columns: 1fr 50px;
+    grid-column-gap: 10px;
+    background: rgb(0, 152, 208);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+.chat-card .sender .text{
+    background: #fff;
+    color: #8c8c8c;
+    padding: 20px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+}
+.chat-card .sender .text:focus{
+    outline: none;
+}
+.chat-card .sender button{
+    border-radius: 100%;
+    border: none;
+    background: rgb(0, 78, 130);
+    text-decoration: none;
+}
+.chat-card .sender button:focus{
+    outline: none;
+    cursor: pointer;
+}
+.chat-card .sender button:active{
+    background: rgb(0, 152, 208);
+}
+
+.chat-card .sender button img{
+    width: 100%;
+    padding: 10px;
+    margin-left: 3px;
+}

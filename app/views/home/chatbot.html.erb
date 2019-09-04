@@ -1,3 +1,12 @@
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chatbot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="../../assets/stylesheets/chatbot.css" />
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+</head>
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -6,215 +15,235 @@
 
 
 <!--- Inicio bot-->
-<div id="all"> 
-	<div class="body-box" >
-	<div id="chatbot-box" class="fade ">
-		<div class="d-flex flex-column align-items-center">
-			<div class="chatbot-header d-flex justify-content-between align-items-center w-100 px-2">
-				<p class="m-0">Online - TRE-RN</p>
-			</div>
-			<div id="response" class="w-100 px-2">
-				<div><p class="chat-bot">Olá, em que posso te ajudar?</p></div>
-			</div>
+<div class="chat-card">
+            <header>
+                Chatbot TRE-RN
+            </header>
+            <section id="response" class="chat-body">
+
+            </section>
+            <section class="sender">
+                <input class="text" id="input-chat" type="text" placeholder="Digite sua mensagem...">
+
+                </input>
+
+                <button class="btn-send" onclick="send()">
+                    <img src= <%=image_url('enviar.svg')%> alt="Enviar!">
+                </button>
+            </section>
+        </div>
+		
+
+
+# <div id="all"> 
+# 	<div class="body-box" >
+# 	<div id="chatbot-box" class="fade ">
+# 		<div class="d-flex flex-column align-items-center">
+# 			<div class="chatbot-header d-flex justify-content-between align-items-center w-100 px-2">
+# 				<p class="m-0">Online - TRE-RN</p>
+# 			</div>
+# 			<div id="response" class="w-100 px-2">
+# 				<div><p class="chat-bot">Olá, em que posso te ajudar?</p></div>
+# 			</div>
 			
-			<div class="w-100 px-2 py-1 d-flex justify-content-between chatbot-send">				
-				<input class="w-100" id="input-chat" type="text" placeholder="Mensagem"> 
-				<button onclick="send()" >Enviar</button> 
-			</div>
+# 			<div class="w-100 px-2 py-1 d-flex justify-content-between chatbot-send">				
+# 				<input class="w-100" id="input-chat" type="text" placeholder="Mensagem"> 
+# 				<button onclick="send()" >Enviar</button> 
+# 			</div>
 
-			<div>
-				<br />
-				<a href="https://api.whatsapp.com/send?phone=558491359301&text=Olá">Adicionar no Whatsapp</a>
-			</div>
-		</div>
-	</div>
-</div>
-<script type="text/javascript">
+# 			<div>
+# 				<br />
+# 				<a href="https://api.whatsapp.com/send?phone=558491359301&text=Olá">Adicionar no Whatsapp</a>
+# 			</div>
+# 		</div>
+# 	</div>
+# </div>
+# <script type="text/javascript">
 
-	//var accessToken = "3698561f1dae4563a203193d65dbff8d";
-	var accessToken = "439ce00732d147ac85977f7e516a306e";
-	var baseUrl = "https://api.api.ai/v1/";	
+# 	//var accessToken = "3698561f1dae4563a203193d65dbff8d";
+# 	var accessToken = "439ce00732d147ac85977f7e516a306e";
+# 	var baseUrl = "https://api.api.ai/v1/";	
 
-	$(document).ready(function() {
-		$("#input-chat").keypress(function(event) {
-			if (event.which == 13) {
-				event.preventDefault();
-				send();
-			}
-		});
-		$("#rec").click(function(event) {
-			switchRecognition();
-		});
-	});
+# 	$(document).ready(function() {
+# 		$("#input-chat").keypress(function(event) {
+# 			if (event.which == 13) {
+# 				event.preventDefault();
+# 				send();
+# 			}
+# 		});
+# 		$("#rec").click(function(event) {
+# 			switchRecognition();
+# 		});
+# 	});
 
-	var recognition;
+# 	var recognition;
  
-	function startRecognition() {
-		recognition = new webkitSpeechRecognition();
-		recognition.onstart = function(event) {
-			updateRec();
-		};
-		recognition.onresult = function(event) {
-			var text = "";
-			for (var i = event.resultIndex; i < event.results.length; ++i) {
-				text += event.results[i][0].transcript;
-			}
-			setInput(text);
-			stopRecognition();
-		};
-		recognition.onend = function() {
-			stopRecognition();
-		};
-		recognition.lang = "en-US";
-		recognition.start();
-	}
+# 	function startRecognition() {
+# 		recognition = new webkitSpeechRecognition();
+# 		recognition.onstart = function(event) {
+# 			updateRec();
+# 		};
+# 		recognition.onresult = function(event) {
+# 			var text = "";
+# 			for (var i = event.resultIndex; i < event.results.length; ++i) {
+# 				text += event.results[i][0].transcript;
+# 			}
+# 			setInput(text);
+# 			stopRecognition();
+# 		};
+# 		recognition.onend = function() {
+# 			stopRecognition();
+# 		};
+# 		recognition.lang = "en-US";
+# 		recognition.start();
+# 	}
 
-	function stopRecognition() {
-		if (recognition) {
-			recognition.stop();
-			recognition = null;
-		}
-		updateRec();
-	}
+# 	function stopRecognition() {
+# 		if (recognition) {
+# 			recognition.stop();
+# 			recognition = null;
+# 		}
+# 		updateRec();
+# 	}
 
-	function switchRecognition() {
-		if (recognition) {
-			stopRecognition();
-		} else {
-			startRecognition();
-		}
-	}
+# 	function switchRecognition() {
+# 		if (recognition) {
+# 			stopRecognition();
+# 		} else {
+# 			startRecognition();
+# 		}
+# 	}
 
-	function setInput(text) {
-		$("#input-chat").val(text);
-		send();
-	}
+# 	function setInput(text) {
+# 		$("#input-chat").val(text);
+# 		send();
+# 	}
 
-	function updateRec() {
-		$("#rec").text(recognition ? "Stop" : "Speak");
-	}
+# 	function updateRec() {
+# 		$("#rec").text(recognition ? "Stop" : "Speak");
+# 	}
 
-	function send() {
+# 	function send() {
 			
-		function estaDemorando (){
-			setBotResponse("Vejo que você ainda não resolver seu problema. Você pode entrar em contato com o suporte pelo número 5555-5555");
-		}
-		setTimeout(estaDemorando, 1000*60*8);
-		var text = $("#input-chat").val();
-		$("#input-chat").val("");
-		setUserResponse(text);
-		$.ajax({
-			type: "POST",
-			url: baseUrl + "query?v=20150910",
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			headers: {
-				"Authorization": "Bearer " + accessToken
-			},
-			data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+# 		function estaDemorando (){
+# 			setBotResponse("Vejo que você ainda não resolver seu problema. Você pode entrar em contato com o suporte pelo número 5555-5555");
+# 		}
+# 		setTimeout(estaDemorando, 1000*60*8);
+# 		var text = $("#input-chat").val();
+# 		$("#input-chat").val("");
+# 		setUserResponse(text);
+# 		$.ajax({
+# 			type: "POST",
+# 			url: baseUrl + "query?v=20150910",
+# 			contentType: "application/json; charset=utf-8",
+# 			dataType: "json",
+# 			headers: {
+# 				"Authorization": "Bearer " + accessToken
+# 			},
+# 			data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
 
-			success: function(data) {				
-				console.log(data);
-				var res = data.result.fulfillment.messages;
-				let qtd_msg = data.result.fulfillment.messages.length;
-				console.log(`qtd_msg = ${qtd_msg}`);
-				for (index = 0; index < qtd_msg; ++index) {
-					let imageUrl = res[index].imageUrl;
-					console.log(res[index].type);
-					if(res[index].type == 2){
-						console.log("Type 2");
-					} else if (res[index].type == 3 && imageUrl != undefined) {
-						if(imageUrl == "https://i.ibb.co/4J5qZBf/help2.jpg"){
-							setBotIconImageResponse(imageUrl);
-						}else {
-							setBotImageResponse(imageUrl);
-						}														
-					} else {
-						setBotResponse(res[index].speech);
-					} 				
-				}
-				console.log(res);
-			},
-			error: function() {
-				setBotResponse("Internal Server Error");
-			}
-		});
-	}
+# 			success: function(data) {				
+# 				console.log(data);
+# 				var res = data.result.fulfillment.messages;
+# 				let qtd_msg = data.result.fulfillment.messages.length;
+# 				console.log(`qtd_msg = ${qtd_msg}`);
+# 				for (index = 0; index < qtd_msg; ++index) {
+# 					let imageUrl = res[index].imageUrl;
+# 					console.log(res[index].type);
+# 					if(res[index].type == 2){
+# 						console.log("Type 2");
+# 					} else if (res[index].type == 3 && imageUrl != undefined) {
+# 						if(imageUrl == "https://i.ibb.co/4J5qZBf/help2.jpg"){
+# 							setBotIconImageResponse(imageUrl);
+# 						}else {
+# 							setBotImageResponse(imageUrl);
+# 						}														
+# 					} else {
+# 						setBotResponse(res[index].speech);
+# 					} 				
+# 				}
+# 				console.log(res);
+# 			},
+# 			error: function() {
+# 				setBotResponse("Internal Server Error");
+# 			}
+# 		});
+# 	}
 
-	function setBotIconImageResponse(url){
-		let res = `<div> <img id="chat-bot-icon-image" src="${url}" alt="img" face" height="70" width="70" onclick="chatBotOpenModal()"> </div>`;
-		$("#response").append(res);
-	}
+# 	function setBotIconImageResponse(url){
+# 		let res = `<div> <img id="chat-bot-icon-image" src="${url}" alt="img" face" height="70" width="70" onclick="chatBotOpenModal()"> </div>`;
+# 		$("#response").append(res);
+# 	}
 
-	function setBotImageResponse(url){
-		let res = `<div> <img id="chat-bot-image" src="${url}" alt="img" face" height="200" width="200" onclick="chatBotOpenModal()"> </div>`;
-		$("#response").append(res);
-		let res_link = `<div> <a href="${url}"> Imagem Amplianda </a> </div>`;
-		$("#response").append(res_link);
-	}
+# 	function setBotImageResponse(url){
+# 		let res = `<div> <img id="chat-bot-image" src="${url}" alt="img" face" height="200" width="200" onclick="chatBotOpenModal()"> </div>`;
+# 		$("#response").append(res);
+# 		let res_link = `<div> <a href="${url}"> Imagem Amplianda </a> </div>`;
+# 		$("#response").append(res_link);
+# 	}
 
-	function setUserResponse(res){
-		res = "<div> <p class='chat-user'>"+res+"</p> </div>";
-		$("#response").append(res);
-	}
+# 	function setUserResponse(res){
+# 		res = "<div> <p class='chat-user'>"+res+"</p> </div>";
+# 		$("#response").append(res);
+# 	}
 
-	function setBotResponse(res){
-		res = "<div> <p class='chat-bot'>"+res+"</p> </div>";
-		$("#response").append(res);
-		scrollDiv();
-	}
-	// Auto Scroll Div Chat bot
-	function scrollDiv()
-	{
-		var el;
-		if ((el = document.getElementById('response')) && ('undefined' != typeof el.scrollTop))
-		{
-			el.scrollTop = 0;
-			el.scrollTop = 5000;
-		}
-	}
+# 	function setBotResponse(res){
+# 		res = "<div> <p class='chat-bot'>"+res+"</p> </div>";
+# 		$("#response").append(res);
+# 		scrollDiv();
+# 	}
+# 	// Auto Scroll Div Chat bot
+# 	function scrollDiv()
+# 	{
+# 		var el;
+# 		if ((el = document.getElementById('response')) && ('undefined' != typeof el.scrollTop))
+# 		{
+# 			el.scrollTop = 0;
+# 			el.scrollTop = 5000;
+# 		}
+# 	}
 
 
-</script>	
+# </script>	
 
 <style type="text/css">
-	#all{
-		height: 300px;
-		width: 400px;
-		margin-left: 200px;
-		margin-top: 100px;
-		overflow: auto;
-	}
-	/*Chat-bot-image style */
-	#chat-bot-image:hover {
-		opacity: 0.5;
-	}
-	#chat-bot-image {
-		cursor: pointer;
-	}
-	.chat-user{
-		background-color:lightblue;
-		text-align:center;
-		overflow:auto;
-		-moz-border-radius:7px;
-		-webkit-border-radius:7px;
-		border-radius:7px;
-	}
-	.chat-bot{
-		background-color: darkseagreen;
-		text-align:center;
-		overflow:auto;
-		-moz-border-radius:7px;
-		-webkit-border-radius:7px;
-		border-radius:7px;
-	}
-	#response{
-		text-align:center;
-		overflow:auto;
-		-moz-border-radius:7px;
-		-webkit-border-radius:7px;
-		border-radius:7px;
-	}
+	# #all{
+	# 	height: 300px;
+	# 	width: 400px;
+	# 	margin-left: 200px;
+	# 	margin-top: 100px;
+	# 	overflow: auto;
+	# }
+	# /*Chat-bot-image style */
+	# #chat-bot-image:hover {
+	# 	opacity: 0.5;
+	# }
+	# #chat-bot-image {
+	# 	cursor: pointer;
+	# }
+	# .chat-user{
+	# 	background-color:lightblue;
+	# 	text-align:center;
+	# 	overflow:auto;
+	# 	-moz-border-radius:7px;
+	# 	-webkit-border-radius:7px;
+	# 	border-radius:7px;
+	# }
+	# .chat-bot{
+	# 	background-color: darkseagreen;
+	# 	text-align:center;
+	# 	overflow:auto;
+	# 	-moz-border-radius:7px;
+	# 	-webkit-border-radius:7px;
+	# 	border-radius:7px;
+	# }
+	# #response{
+	# 	text-align:center;
+	# 	overflow:auto;
+	# 	-moz-border-radius:7px;
+	# 	-webkit-border-radius:7px;
+	# 	border-radius:7px;
+	# }
 </style>
 
 <!-- remote teste -->

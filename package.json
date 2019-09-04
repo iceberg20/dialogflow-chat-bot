@@ -1,5 +1,7 @@
 {
   "name": "chat-bot",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "postman": "^0.2.0"
+  }
 }
