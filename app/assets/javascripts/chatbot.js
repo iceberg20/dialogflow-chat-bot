@@ -3,10 +3,11 @@ var accessToken = "439ce00732d147ac85977f7e516a306e";
 var baseUrl = "https://api.api.ai/v1/";
 
 $(document).ready(function () {
-    $("#input-chat").keypress(function (event) {
-        console.log(event)
-        if (event.keyCode || event.which == 13) {
-            event.preventDefault();
+    $("#input-chat").keypress(function (e) {
+        console.log(e)
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            e.preventDefault();
             send();
         }
     });
@@ -108,17 +109,17 @@ function send() {
     });
 }
 
-function setBotIconImageResponse(url) {
-    let res = `<div> <img id="chat-bot-icon-image" src="${url}" alt="img" face" height="70" width="70" onclick="chatBotOpenModal()"> </div>`;
-    $("#response").append(res);
-}
+// function setBotIconImageResponse(url) {
+//     let res = `<div> <img id="chat-bot-icon-image" src="${url}" alt="img" face" height="70" width="70" onclick="chatBotOpenModal()"> </div>`;
+//     $("#response").append(res);
+// }
 
-function setBotImageResponse(url) {
-    let res = `<div> <img id="chat-bot-image" src="${url}" alt="img" face" height="200" width="200" onclick="chatBotOpenModal()"> </div>`;
-    $("#response").append(res);
-    let res_link = `<div> <a href="${url}"> Imagem Amplianda </a> </div>`;
-    $("#response").append(res_link);
-}
+// function setBotImageResponse(url) {
+//     let res = `<div> <img id="chat-bot-image" src="${url}" alt="img" face" height="200" width="200" onclick="chatBotOpenModal()"> </div>`;
+//     $("#response").append(res);
+//     let res_link = `<div> <a href="${url}"> Imagem Amplianda </a> </div>`;
+//     $("#response").append(res_link);
+// }
 
 function setUserResponse(res) {
     res = "<article class='message message-user'><p>" + res + "</p> </article>";
