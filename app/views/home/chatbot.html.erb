@@ -86,7 +86,7 @@
 	}
 
 	function setInput(text) {
-		$("#input-chat").val(text);
+		$(".input-chat").val(text);
 		send();
 	}
 
@@ -101,7 +101,7 @@
 		}
 		setTimeout(estaDemorando, 1000*60*8);
 		var text = $("#input-chat").val();
-		$("#input-chat").val("");
+		$(".input-chat").val("");
 		setUserResponse(text);
 		$.ajax({
 			type: "POST",
