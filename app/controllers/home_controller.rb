@@ -4,4 +4,7 @@ class HomeController < ApplicationController
 
   def iframe
   end
+
+  def template
+  end
 end
